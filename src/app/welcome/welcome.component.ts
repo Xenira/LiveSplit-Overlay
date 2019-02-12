@@ -14,7 +14,6 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() { }
 
   nextClicked() {
-    console.log('next')
     this.showPage(this.lastSetupStep + 1);
   }
 

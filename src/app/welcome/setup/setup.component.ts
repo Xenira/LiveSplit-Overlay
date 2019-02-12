@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ApplicationRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ApplicationRef, Output, EventEmitter } from '@angular/core';
 import { OverwolfService, eEncoding } from 'src/app/global/overwolf.service';
 
 const layoutRegex = /<LayoutPath>(.+)<\/LayoutPath>/g;
@@ -10,11 +10,14 @@ const layoutRegex = /<LayoutPath>(.+)<\/LayoutPath>/g;
 })
 export class SetupComponent implements OnInit {
 
+  @Output() done = new EventEmitter<void>();
+
   util: any;
   setupStep = 0;
   baseInstalled: boolean = null;
   paths: string[];
   error: string;
+  startingLiveSplit = false;
   testingConnection = false;
   livesplitDirectory: string;
 
@@ -30,6 +33,7 @@ export class SetupComponent implements OnInit {
   }
 
   setSetupStep(step: number) {
+    this.error = null;
     this.setupStep = step;
     console.log(this.setupStep);
     this.ref.tick();
@@ -48,7 +52,7 @@ export class SetupComponent implements OnInit {
         break;
       case 4:
         this.util.extractZipFromWebToUserFolder(
-          'https://github.com/Xenira/LiveSplit-Websocket/releases/download/v.0.1/LiveSplitWebsocket.zip',
+          'https://github.com/Xenira/LiveSplit-Websocket/releases/download/v0.1.1/LiveSplitWebsocket.zip',
           'LiveSplit/Components', false, (res) => {
             if (!res.success) {
               return this.error = res.data;
@@ -77,19 +81,15 @@ export class SetupComponent implements OnInit {
   }
 
   selectDirectory() {
-    console.log('select directory');
-    this.util.selectFolder((res) => {
+    this.error = null;
+    this._overwolf.openFolderPicker(null).then((res) => {
       console.log('result', res);
 
-      if (!res.success) {
-        this.error = res.data;
-      }
-
-      this.livesplitDirectory = res.data;
+      this.livesplitDirectory = res;
       this._overwolf.fileExists(`${this.livesplitDirectory}\\LiveSplit.exe`).then((exists) => {
         if (!exists) {
           this.livesplitDirectory = null;
-          return this.error = 'Couldnt find LiveSplit within the selected directory.';
+          return this.error = 'Couldn\'t find LiveSplit within the selected directory.';
         }
         localStorage.setItem('livesplit.directory', this.livesplitDirectory);
         this.setSetupStep(2);
@@ -108,11 +108,9 @@ export class SetupComponent implements OnInit {
       return this._overwolf.copyFile(defaultLayoutPath, newLayoutPath)
         .then(() => this._overwolf.readFileContents(applicationConfig, eEncoding.UTF8))
         .then((content) => {
-          console.log('application config', content);
           const lines = content.split('\r\n');
           for (let i = 0; i < lines.length; i++) {
             if (lines[i].indexOf('<RecentLayouts>') > -1) {
-              console.log('Recent layouts at', i);
               lines.splice(i + 1, 0, `    <LayoutPath>${newLayoutPath}</LayoutPath>`);
               break;
             }
@@ -121,7 +119,6 @@ export class SetupComponent implements OnInit {
               break;
             }
           }
-          console.log('new config', lines);
           return this._overwolf.writeFileContents(applicationConfig, lines.join('\r\n'), eEncoding.UTF8);
         }).then(() => true);
     }
@@ -142,7 +139,7 @@ export class SetupComponent implements OnInit {
           const line = lines[i];
           if (line.indexOf('<Path>LiveSplit.Websocket.dll</Path>') > -1) {
             // Component already added
-            console.log('websocket already present in', layout)
+            console.log('websocket already present in', layout);
             break;
           }
           if (line.indexOf('</Components>') > -1) {
@@ -185,17 +182,34 @@ export class SetupComponent implements OnInit {
   }
 
   testConnection() {
+    this.error = null;
     this.testingConnection = true;
+    this.ref.tick();
     const ws = new WebSocket('ws://localhost:16835/livesplit');
     ws.addEventListener('open', (ev) => {
       ws.close();
       setTimeout(() => {
         this.testingConnection = false;
-        this.setSetupStep(7);
+        this.done.next();
+        this.ref.tick();
       }, 500);
     });
     ws.addEventListener('error', (ev) => {
+      this.testingConnection = false;
       this.error = 'Unable to connect to LiveSplit. Make sure LiveSplit is running and the Server is started.';
+      this.ref.tick();
+    });
+  }
+
+  startLiveSplit() {
+    this.startingLiveSplit = true;
+    this.ref.tick();
+    this.util.startApplication(`${this.livesplitDirectory}/LiveSplit.exe`, (res) => {
+      setTimeout(() => {
+        this.startingLiveSplit = false;
+        this.ref.tick();
+        console.log(res);
+      }, 500);
     });
   }
 

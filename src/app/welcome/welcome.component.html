@@ -1,5 +1,5 @@
 <div id="content" [ngSwitch]="lastSetupStep">
     <ls-landing *ngSwitchCase="0" (next)="nextClicked($event)"></ls-landing>
-    <ls-setup *ngSwitchCase="1"></ls-setup>
+    <ls-setup *ngSwitchCase="1" (done)="nextClicked()"></ls-setup>
     <ls-finished *ngSwitchCase="2"></ls-finished>
 </div>

@@ -4,7 +4,15 @@
     flex-direction: column;
     justify-content: space-evenly;
     text-align: center;
-    h1 {
-        font-size: 2.75rem;
+}
+
+h1 {
+    font-size: 2.75rem;
+}
+
+.small {
+    font-size: .75rem;
+    a {
+        color: white;
     }
 }

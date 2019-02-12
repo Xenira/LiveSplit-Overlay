@@ -1,19 +1,21 @@
-<div id="done">
-  <div class="section">
-    <h1>Finished!</h1>
-    <div>
-      <p>The LiveSplit overlay is now ready to use. Check out these resources to get you started:</p>
-      <ls-button>
-        <fa-icon icon="question-circle"></fa-icon>FAQ
-      </ls-button>
-      <ls-button>
-        <fa-icon icon="graduation-cap"></fa-icon>Tutorial
-      </ls-button>
-      <ls-button>
-        <fa-icon icon="code"></fa-icon>GitHub
-      </ls-button>
-      <ls-button>Close</ls-button>
-    </div>
-    <a id="homeNext" onclick="showPage(1);">Let's get started</a>
-  </div>
+<h1>Finished!</h1>
+<div>
+  <p>The LiveSplit overlay is now ready to use.</p>
+  <p>Check out these resources to get you started:</p>
 </div>
+<div>
+  <ls-button href="http://livesplit.org/">
+    <fa-icon icon="globe"></fa-icon>LiveSplit Website
+  </ls-button>
+  <ls-button href="http://livesplit.org/introduction/">
+    <fa-icon icon="graduation-cap"></fa-icon>LiveSplit
+    Tutorial
+  </ls-button>
+  <ls-button>
+    <fa-icon icon="question-circle"></fa-icon>FAQ
+  </ls-button>
+  <ls-button href="https://github.com/Xenira/LiveSplit-Overlay" target="default">
+    <fa-icon icon="code"></fa-icon>GitHub
+  </ls-button>
+</div>
+<ls-button (click)="close()">Close</ls-button>

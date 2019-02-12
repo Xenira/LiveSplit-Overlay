@@ -5,12 +5,14 @@ import { LandingComponent } from './landing/landing.component';
 import { SetupComponent } from './setup/setup.component';
 import { FinishedComponent } from './finished/finished.component';
 import { GlobalModule } from '../global/global.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [WelcomeComponent, LandingComponent, SetupComponent, FinishedComponent],
   imports: [
     CommonModule,
-    GlobalModule
+    GlobalModule,
+    FontAwesomeModule
   ],
   exports: [WelcomeComponent]
 })

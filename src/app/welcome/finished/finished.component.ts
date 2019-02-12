@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OverwolfService } from 'src/app/global/overwolf.service';
 
 @Component({
   selector: 'ls-finished',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinishedComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _overwolf: OverwolfService) { }
 
   ngOnInit() {
+  }
+
+  close() {
+    this._overwolf.closeWindow().then(() => { });
   }
 
 }

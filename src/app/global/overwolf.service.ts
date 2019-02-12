@@ -94,4 +94,34 @@ export class OverwolfService {
       });
     });
   }
+
+  openFolderPicker(path: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      overwolf.utils.openFolderPicker(path, (res) => {
+        if (res.status !== 'success') {
+          return reject(res);
+        }
+        resolve(res.path);
+      });
+    });
+  }
+
+  openUrlInDefaultBrowser(url: string) {
+    overwolf.utils.openUrlInDefaultBrowser(url);
+  }
+
+  openUrlInOverwolfBrowser(url: string) {
+    overwolf.utils.openUrlInOverwolfBrowser(url);
+  }
+
+  closeWindow(window?: string) {
+    return new Promise((resolve, reject) => {
+      overwolf.windows.close(window || this.window.id, (res) => {
+        if (res.status !== 'success') {
+          return reject(res);
+        }
+        resolve(res);
+      });
+    });
+  }
 }

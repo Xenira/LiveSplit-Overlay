@@ -5,31 +5,54 @@
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>Main</title>
     <script>
-        let lastSetupStep = Number(window.localStorage.getItem('setup') || 0);
-        console.log(lastSetupStep)
-        if (lastSetupStep > 3) {
-            console.log('Starting livesplit');
-            overwolf.windows.obtainDeclaredWindow("LiveSplitWindow",
-                function (result) {
-                    if (result.status == "success") {
-                        overwolf.windows.restore(result.window.id,
-                            function (result) { }
-                        );
+        let activeWindows = [];
+        overwolf.windows.onStateChanged.addListener((event) => {
+            console.log(event);
+            switch (event.window_state) {
+                case 'opened':
+                    activeWindows.push(event.window_id);
+                    break;
+                case 'closed': {
+                    const index = activeWindows.indexOf(event.window_id);
+                    if (index > -1) {
+                        activeWindows.splice(index, 1);
                     }
                 }
-            );
-        } else {
-            console.log('Starting welcome');
-            overwolf.windows.obtainDeclaredWindow("WelcomeWindow",
-                function (result) {
-                    if (result.status == "success") {
-                        overwolf.windows.restore(result.window.id,
-                            function (result) { }
-                        );
+                default:
+                    break;
+            }
+            if (activeWindows.length === 0) {
+                startWindow();
+            }
+        })
+        function startWindow() {
+            let lastSetupStep = Number(window.localStorage.getItem('setup') || 0);
+            console.log(lastSetupStep)
+            if (lastSetupStep >= 2) {
+                console.log('Starting livesplit');
+                overwolf.windows.obtainDeclaredWindow("LiveSplitWindow",
+                    function (result) {
+                        if (result.status == "success") {
+                            overwolf.windows.restore(result.window.id,
+                                function (result) { console.log(result) }
+                            );
+                        }
                     }
-                }
-            );
+                );
+            } else {
+                console.log('Starting welcome');
+                overwolf.windows.obtainDeclaredWindow("WelcomeWindow",
+                    function (result) {
+                        if (result.status == "success") {
+                            overwolf.windows.restore(result.window.id,
+                                function (result) { console.log(result) }
+                            );
+                        }
+                    }
+                );
+            }
         }
+        startWindow();
     </script>
 </head>
 

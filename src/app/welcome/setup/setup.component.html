@@ -14,7 +14,8 @@
     <ls-button (click)="selectDirectory()">Select Directory</ls-button>
   </div>
   <div *ngIf="setupStep === 2">
-    <p *ngIf="baseInstalled">This will install the LiveSplit Websocket Server at {{livesplitDirectory}}.</p>
+    <p *ngIf="baseInstalled">This will install the LiveSplit Websocket Server at {{livesplitDirectory}}.<br>Please make
+      sure LiveSplit is not running.</p>
     <p *ngIf="!baseInstalled">This will install the LiveSplit in your user directory. If a folder 'LiveSplit' already
       exists it will be overriden.</p>
     <ls-button (click)="setSetupStep(0)">Back</ls-button>
@@ -37,11 +38,9 @@
   <p>Before using the LiveSplit Overlay you will need to activate the Websocket in the LiveSplit base application.</p>
   <p>To start the Server rightclick the LiveSplit window and select Control > Start Server (WS).<br>
     This has to be done each time you start the LiveSplit base application.</p>
-  <ls-button *ngIf="!testingConnection" (click)="testConnection()">Test Connection</ls-button>
-  <ls-button *ngIf="testingConnection"><img class="spinner" src="../assets/sync-solid.svg"></ls-button>
+  <ls-button *ngIf="!testingConnection && !startingLiveSplit" (click)="startLiveSplit()">Start LiveSplit</ls-button>
+  <ls-button *ngIf="!testingConnection && !startingLiveSplit" (click)="testConnection()">Test Connection</ls-button>
+  <ls-button *ngIf="testingConnection || startingLiveSplit"><img class="spinner" src="../assets/sync-solid.svg">
+  </ls-button>
 </div>
-<h3 *ngIf="error" class="error">{{error}}</h3>
-<div [style.visibility]="setupStep !== 7 ? 'hidden' : ''">
-  <p>Congratulations! The setup is now complete.</p>
-  <ls-button (click)="testConnection()">Finish</ls-button>
-</div>
+<h3 [style.visibility]="error ? '' : 'hidden'" class="error">Error: {{error}}</h3>
