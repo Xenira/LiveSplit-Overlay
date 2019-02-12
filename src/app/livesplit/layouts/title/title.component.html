@@ -1,0 +1,10 @@
+<div id="container">
+  <p>
+    {{game?.gameName}}<br>
+    {{game?.categoryName}}
+  </p>
+  <div id="attempts">
+    <span *ngIf="settings.showFinishedRunCount">{{game?.completedAttempts}}/</span>
+    <span>{{game?.attempts}}</span>
+  </div>
+</div>

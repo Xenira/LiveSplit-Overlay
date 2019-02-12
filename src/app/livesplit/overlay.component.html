@@ -1,0 +1,21 @@
+<div id="container" [style.opacity]="layout.opacity">
+  <div id="content" (mousedown)="dragMove($event)">
+    <div *ngIf="connected">
+      <div *ngFor="let element of layout">
+        <div [ngSwitch]="element">
+          <ls-splits *ngSwitchCase="'splits'"></ls-splits>
+          <ls-timer *ngSwitchCase="'timer'"></ls-timer>
+          <ls-title *ngSwitchCase="'title'"></ls-title>
+        </div>
+      </div>
+    </div>
+    <div id="not-connected" *ngIf="!connected">
+      <fa-icon icon="exclamation" [style.font-size]="'16vw'"></fa-icon>
+      <div>
+        <p>Could not connect to LiveSplit</p>
+        <a (click)="connect()">Retry</a>
+      </div>
+    </div>
+  </div>
+  <div id="resize" (mousedown)="dragResize($event)"></div>
+</div>

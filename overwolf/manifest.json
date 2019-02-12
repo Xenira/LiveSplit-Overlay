@@ -1,0 +1,72 @@
+{
+	"manifest_version": 1,
+	"type": "WebApp",
+	"meta": {
+		"name": "LiveSplit",
+		"version": "0.0.1",
+		"minimum-overwolf-version": "0.102.1",
+		"author": "Lasse Sprengel",
+		"icon": "IconMouseOver.png",
+		"icon_gray": "IconMouseNormal.png",
+		"description": "LiveSplit overlay for speed-running."
+	},
+	"permissions": [
+		"Extensions",
+		"FileSystem"
+	],
+	"data": {
+		"game_targeting": {
+			"type": "all"
+		},
+		"start_window": "MainWindow",
+		"force_browser": "user",
+		"extra-objects": {
+			"livesplit-util": {
+				"file": "plugins/ow-livesplit.dll",
+				"class": "ow.plugin.livesplit.Util"
+			},
+			"livesplit": {
+				"file": "plugins/ow-livesplit.dll",
+				"class": "ow.plugin.livesplit.LiveSplit"
+			}
+		},
+		"windows": {
+			"MainWindow": {
+				"file": "static/main.html",
+				"is_background_page": true
+			},
+			"LiveSplitWindow": {
+				"file": "index.html",
+				"transparent": true,
+				"resizable": true,
+				"topmost": true,
+				"size": {
+					"width": "300",
+					"height": "525"
+				},
+				"min_size": {
+					"width": "200",
+					"height": "200"
+				},
+				"max_size": {
+					"width": "600",
+					"height": "1200"
+				}
+			},
+			"WelcomeWindow": {
+				"file": "index.html",
+				"native_window": true,
+				"transparent": false,
+				"resizable": true,
+				"size": {
+					"width": "1280",
+					"height": "775"
+				},
+				"min_size": {
+					"width": "1280",
+					"height": "775"
+				}
+			}
+		}
+	}
+}

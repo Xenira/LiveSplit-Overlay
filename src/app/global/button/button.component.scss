@@ -1,0 +1,20 @@
+a {
+    border-color: #3373F4;
+    border-style: solid;
+    padding: 32px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    user-select: none;
+    pointer-events: initial;
+}
+
+a:hover {
+    background-color: rgba(51, 115, 244, 0.2);
+    cursor: pointer;
+}
+
+:host {
+    pointer-events: none;
+    padding-top: 32px;
+    padding-bottom: 32px;
+}

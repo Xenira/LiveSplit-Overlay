@@ -1,0 +1,11 @@
+<div *ngFor="let split of splits; let i = index" [style.background-color]="getSplitBackground(i) | rgbaHex">
+  <div class="hr" [style.background-color]="layout.colors.seperator | rgbaHex"></div>
+  <div id="container">
+    <span id="name">{{split.name}}</span>
+    <span *ngIf="i < currentSplit" class="split-time" [style.color]="getColor(i) | rgbaHex">{{diff(split) |
+      timer:true}}</span>
+    <span *ngIf="i == currentSplit" class="split-time" [style.color]="getColor(i) | rgbaHex">{{splitDiff() |
+      timer:true}}</span>
+    <span class="split-time">{{time(split) | timer:false:0}}</span>
+  </div>
+</div>

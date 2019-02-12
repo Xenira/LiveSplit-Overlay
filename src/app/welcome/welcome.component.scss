@@ -1,0 +1,53 @@
+:host {
+    width: 100%;
+}
+
+input {
+    display: none;
+}
+
+.setup-step
+
+.setup-step.active h2 {
+    font-size: 1.75rem;
+}
+
+.setup-step.active p {
+    display: block;
+}
+
+.setup-step.active {
+    color: rgb(255, 255, 255);
+}
+
+#content {
+    height: 100%;
+}
+
+#setup {
+    display: none;
+}
+
+#content>div {
+    height: 100%;
+}
+
+#content .section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+/* a.secondary {
+            border-color: #7A7A7A;
+        }
+
+        a.secondary:hover {
+            background-color: rgba(122, 122, 122, 0.2);
+        } */
+
+#spinner {
+    display: none;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>Main</title>
+    <script>
+        let lastSetupStep = Number(window.localStorage.getItem('setup') || 0);
+        console.log(lastSetupStep)
+        if (lastSetupStep > 3) {
+            console.log('Starting livesplit');
+            overwolf.windows.obtainDeclaredWindow("LiveSplitWindow",
+                function (result) {
+                    if (result.status == "success") {
+                        overwolf.windows.restore(result.window.id,
+                            function (result) { }
+                        );
+                    }
+                }
+            );
+        } else {
+            console.log('Starting welcome');
+            overwolf.windows.obtainDeclaredWindow("WelcomeWindow",
+                function (result) {
+                    if (result.status == "success") {
+                        overwolf.windows.restore(result.window.id,
+                            function (result) { }
+                        );
+                    }
+                }
+            );
+        }
+    </script>
+</head>
+
+<body>
+    You shouldn't be here!
+</body>
+
+</html>

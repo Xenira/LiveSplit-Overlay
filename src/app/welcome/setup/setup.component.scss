@@ -1,0 +1,56 @@
+:host {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+h2 {
+    color: rgba(255, 255, 255, .3);
+}
+
+.setup-step {
+    ls-button,
+    p {
+        display: none;
+    }
+}
+
+.active {
+    ls-button {
+        display: inline-block;
+        margin: 8px;
+    }
+    h2 {
+        font-size: 1.75rem;
+        color: white;
+    }
+    p {
+        display: block;
+    }
+}
+
+.error {
+    color: red;
+}
+
+.spinner {
+    height: 30px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+    fill: white;
+    animation-name: spin;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    background: url(../../../assets/sync-solid.svg);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

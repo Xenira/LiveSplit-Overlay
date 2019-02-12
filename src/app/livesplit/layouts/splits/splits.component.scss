@@ -1,0 +1,21 @@
+#container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    line-height: 1.75rem;
+
+    #name {
+        width: 60%;
+    }
+    .split-time {
+        font-weight: 800;
+    }
+    span {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+}
+.hr {
+    height: 1px;
+}

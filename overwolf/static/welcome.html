@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>Welcome!</title>
+    <style>
+        html,
+        body {
+            background-color: rgb(15, 15, 15);
+            color: rgb(255, 255, 255);
+            height: 100%;
+            margin: 0;
+            text-align: center;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        input {
+            display: none;
+        }
+
+        .setup-step {
+            color: rgba(255, 255, 255, .3);
+        }
+
+        .setup-step a,
+        .setup-step p {
+            display: none;
+        }
+
+        .setup-step.active a {
+            padding: 12px;
+            display: inline-block;
+        }
+
+        .setup-step.active h2 {
+            font-size: 1.75rem;
+        }
+
+        .setup-step.active p {
+            display: block;
+        }
+
+        .setup-step.active {
+            color: rgb(255, 255, 255);
+        }
+
+        #content {
+            height: 100%;
+        }
+
+        #setup {
+            display: none;
+        }
+
+        #content>div {
+            height: 100%;
+        }
+
+        #content .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            height: 100%;
+        }
+
+        a {
+            border-color: #3373F4;
+            border-style: solid;
+            /* border-radius: 12px; */
+            padding: 32px;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            user-select: none;
+        }
+
+
+        a:hover {
+            background-color: rgba(51, 115, 244, 0.2);
+        }
+
+        /* a.secondary {
+            border-color: #7A7A7A;
+        }
+
+        a.secondary:hover {
+            background-color: rgba(122, 122, 122, 0.2);
+        } */
+
+        #spinner {
+            display: none;
+        }
+
+        .spinner {
+            height: 30px;
+            margin-top: -10px;
+            margin-bottom: -10px;
+            fill: white;
+            animation-name: spin;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            background: url(../assets/sync-solid.svg);
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width:20px; height:20px; bottom:0; right:0; position:absolute;" onmousedown="dragResize('BottomRight');"></div>
+    <div id="content">
+        <div id="home">
+            <div class="section">
+                <h1>Welcome to Overwolf LiveSplit</h1>
+
+                <div>
+                    <p>Thanks for installing the Livesplit App.</p>
+                    We need to perform a quick setup before you are ready to go.
+                </div>
+                <a id="homeNext" onclick="showPage(1);">Let's get started</a>
+            </div>
+        </div>
+        <div id="setup">
+            <div class="section">
+                <h1>LiveSplit Setup</h1>
+
+                <div>
+                    <div id="step1" class="setup-step">
+                        <h2>1. Installing LiveSplit</h2>
+                        <p>Download and extract the LiveSplit application:</p>
+                        <a href="http://livesplit.org/downloads/" target="_blank">Download LiveSplit</a>
+                    </div>
+                    <div id="step2" class="setup-step">
+                        <h2>2. Install LiveSplit Websocket</h2>
+                        <p>Next we need to add the Websocket component to livesplit. This will allow this application
+                            to talk to LiveSplit.</p>
+                        <div id="mode-selection">
+                            <a id="automatic" onclick="automaticSetup()">Automatic Installation</a>
+                            <a id="manual" href="https://github.com/Xenira/LiveSplit-Websocket">Manual Installation</a>
+                        </div>
+                        <div id="select-path" style="display: none;">
+                            <p>
+                                Where do you have LiveSplit installed?
+                            </p>
+                            <a onclick="_plugin.selectFolder((res) => console.log(res));">Select Path</a>
+                        </div>
+                    </div>
+                    <div id="step3" class="setup-step">
+                        <h2>4. Start the Server</h2>
+                        <p>The Websocket Server does not start by default.</p>
+                        <p>To start the Server rightclick the LiveSplit
+                            window and select Control > Start Websocket.<br>This has to be done each time you start
+                            LiveSplit (The main Application, not this Overlay)</p>
+
+                    </div>
+                </div>
+                <div>
+                    <a id="back" class="secondary" onclick="showPage(lastSetupStep - 1);">Back</a>
+                    <a id="next" onclick="showPage(lastSetupStep + 1);">Next</a>
+                    <a id="finished" onclick="testConnection();">Finish</a>
+                    <a id="spinner"><img class="spinner" src="../assets/sync-solid.svg"></a>
+                </div>
+            </div>
+        </div>
+        <div id="done">
+            <div class="section">
+                <h1>Aaaaand TIME!</h1>
+                <p>
+                    You took <span id="time"></span><span id="timeMs"></span> to complete this setup.</p>
+                <div>
+                    <p>Thanks for installing the Livesplit App.</p>
+                    We need to perform a quick setup before you are ready to go.
+                </div>
+                <a id="homeNext" onclick="showPage(1);">Let's get started</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let _plugin = null;
+    overwolf.extensions.current.getExtraObject("livesplit-util", (result) => {
+        console.log(result);
+        if (result.status === "success") {
+            _plugin = result.object;
+            _plugin.selectFolder((res) => console.log(res));
+        }
+    })
+
+    const startTime = new Date().getTime(); 1
+    let lastSetupStep = Number(window.localStorage.getItem('setup') || 0);
+
+    const home = document.getElementById('home');
+    const setup = document.getElementById('setup');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    const next = document.getElementById('next');
+    const finished = document.getElementById('finished');
+    const modeSelection = document.getElementById('mode-selection');
+    const selectPath = document.getElementById('select-path');
+    const time = document.getElementById('time')
+    const spinner = document.getElementById('spinner');
+    const done = document.getElementById('done');
+    const back = document.getElementById('back');
+
+    const layoutRegex = /<LayoutPath>(.*)<\/LayoutPath>/
+
+    function showPage(step) {
+        window.localStorage.setItem('setup', step);
+        lastSetupStep = step;
+        home.style.display = 'none';
+        setup.style.display = 'none';
+        done.style.display = 'none';
+        if (step === 0) {
+            document.title = 'Welcome!';
+            home.style.display = 'block';
+        } else if (step > 0 && step < 5) {
+            step1.classList.remove('active')
+            step2.classList.remove('active')
+            step3.classList.remove('active')
+            document.title = 'LiveSplit Setup';
+            setup.style.display = 'block';
+
+            next.style.display = 'inline';
+            back.style.display = '';
+            finished.style.display = 'none';
+            selectPath.style.display = 'none';
+            spinner.style = 'none';
+
+            if (step === 1) {
+                console.log('activating step 1')
+                step1.classList.add('active')
+            } else if (step === 2) {
+                step2.classList.add('active')
+                modeSelection.style.display = 'block';
+            } else if (step === 3) {
+                step3.classList.add('active');
+                next.style.display = 'none';
+                finished.style.display = 'inline';
+            }
+        } else if (step === 4) {
+            document.title = 'Done!';
+            done.style.display = 'block';
+            const times = getTime();
+            time.innerText = times[0];
+        }
+    }
+
+    function automaticSetup() {
+        modeSelection.style.display = 'none';
+        selectPath.style.display = 'block';
+    }
+
+    function testConnection() {
+        finished.style.display = 'none';
+        back.style.display = 'none';
+        spinner.style.display = 'inline-block';
+        const ws = new WebSocket('ws://localhost:16835/livesplit');
+        ws.addEventListener('open', (ev) => {
+            ws.close();
+            setTimeout(() => showPage(5), 500);
+        });
+        ws.addEventListener('error', (ev) => {
+            finished.style.display = '';
+            back.style.display = '';
+            spinner.style = '';
+        })
+    }
+
+    function getTime() {
+        let ms = new Date().getTime() - time;
+        let hours = Math.floor(ms / 3600000);
+        ms -= hours * 3600000;
+        hours = hours ? (hours < 10 ? '0' : '') + hours + ':' : '';
+
+        let minutes = Math.floor(ms / 60000);
+        ms -= minutes * 60000;
+        minutes = minutes + ':';
+
+        let seconds = Math.floor(ms / 1000);
+        ms -= seconds * 1000;
+        return [hours + minutes + seconds, ms % 1000];
+    }
+
+    function installWebsocket(event) {
+        for (const f of folderselect.files) {
+            console.log(f);
+        }
+    }
+
+    showPage(lastSetupStep);
+</script>
+
+</html>

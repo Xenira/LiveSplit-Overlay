@@ -24,12 +24,21 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "overwolf/",
+                "output": "/"
+              }
             ],
             "styles": [
               "src/styles.scss"
             ],
             "scripts": [],
+            "lazyModules": [
+              "src/app/livesplit/overlay.component",
+              "src/app/welcome/welcome.component"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
