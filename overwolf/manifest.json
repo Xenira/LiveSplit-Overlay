@@ -2,9 +2,9 @@
 	"manifest_version": 1,
 	"type": "WebApp",
 	"meta": {
-		"name": "LiveSplit",
+		"name": "LiveSplit Overlay",
 		"version": "0.0.1",
-		"minimum-overwolf-version": "0.102.1",
+		"minimum-overwolf-version": "0.119.1",
 		"author": "Lasse Sprengel",
 		"icon": "IconMouseOver.png",
 		"icon_gray": "IconMouseNormal.png",
@@ -55,7 +55,7 @@
 			},
 			"WelcomeWindow": {
 				"file": "index.html",
-				"native_window": true,
+				"native_window": false,
 				"transparent": false,
 				"resizable": true,
 				"size": {
