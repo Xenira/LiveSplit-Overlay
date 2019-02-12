@@ -1,12 +1,10 @@
 <div id="container" [style.opacity]="layout.opacity">
   <div id="content" (mousedown)="dragMove($event)">
-    <div *ngIf="connected">
-      <div *ngFor="let element of layout">
-        <div [ngSwitch]="element">
-          <ls-splits *ngSwitchCase="'splits'"></ls-splits>
-          <ls-timer *ngSwitchCase="'timer'"></ls-timer>
-          <ls-title *ngSwitchCase="'title'"></ls-title>
-        </div>
+    <div id="layouts" *ngIf="connected">
+      <div *ngFor="let element of layout" [ngSwitch]="element" [class.flex]="element==='splits'">
+        <ls-splits *ngSwitchCase="'splits'"></ls-splits>
+        <ls-timer *ngSwitchCase="'timer'"></ls-timer>
+        <ls-title *ngSwitchCase="'title'"></ls-title>
       </div>
     </div>
     <div id="not-connected" *ngIf="!connected">

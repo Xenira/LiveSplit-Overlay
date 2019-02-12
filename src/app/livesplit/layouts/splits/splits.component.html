@@ -4,8 +4,8 @@
     <span id="name">{{split.name}}</span>
     <span *ngIf="i < currentSplit" class="split-time" [style.color]="getColor(i) | rgbaHex">{{diff(split) |
       timer:true}}</span>
-    <span *ngIf="i == currentSplit" class="split-time" [style.color]="getColor(i) | rgbaHex">{{splitDiff() |
+    <span *ngIf="i == currentSplit" class="split-time">{{splitDiff() |
       timer:true}}</span>
-    <span class="split-time">{{time(split) | timer:false:0}}</span>
+    <span class="split-time">{{time(split) | timer:false:true:0}}</span>
   </div>
 </div>

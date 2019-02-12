@@ -8,7 +8,7 @@ const msSeconds = 1000;
   name: 'timer'
 })
 export class TimerPipe implements PipeTransform {
-  transform(value: number, includePlus?: any, trimMs = 2): any {
+  transform(value: number, includePlus = false, alwaysShowMinutes = false, trimMs = 2): any {
     if (!value && value !== 0) {
       return;
     }
@@ -27,7 +27,7 @@ export class TimerPipe implements PipeTransform {
     const sign = value < 0 ? '-' : (includePlus ? '+' : '');
     const h = hours !== 0 ? hours + ':' : '';
     let m = '';
-    if (minutes || (minutes === 0 && trimMs === 0 && seconds > 0) || hours) {
+    if (minutes || (minutes === 0 && alwaysShowMinutes) || hours) {
       m = ((hours && minutes < 10 && minutes !== 0) ? '0' + minutes : minutes) + ':';
     }
     const s = (minutes || seconds === 0) && (seconds < 10 && (seconds !== 0 || minutes)) ? '0' + seconds : seconds;

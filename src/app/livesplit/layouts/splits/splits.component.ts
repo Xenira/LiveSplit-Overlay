@@ -54,9 +54,9 @@ export class SplitsComponent implements OnInit {
   }
 
   splitDiff() {
-    if (this.currentSplit > 0) {
+    if (this.currentSplit > 0 || this.currentDelta > 0) {
       const delta = this.currentDelta;
-      const prevSplit = this.diff(this.splits[this.currentSplit - 1]);
+      const prevSplit = this.currentSplit === 0 ? this.splits[this.currentSplit].comparison : this.diff(this.splits[this.currentSplit - 1]);
       return (delta > 0 || delta > prevSplit) ? delta : null;
     }
     return null;
