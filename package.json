@@ -40,7 +40,7 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/luxon": "^1.10.2",
-    "@types/node": "~8.9.4",
+    "@types/node": "~11.9.3",
     "@types/socket.io": "^2.1.2",
     "@types/ws": "^6.0.1",
     "codelyzer": "~4.5.0",
