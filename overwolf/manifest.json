@@ -66,6 +66,48 @@
 					"width": "1280",
 					"height": "775"
 				}
+			},
+			"HelpWindow": {
+				"file": "index.html",
+				"native_window": false,
+				"transparent": false,
+				"resizable": true,
+				"size": {
+					"width": "1280",
+					"height": "775"
+				},
+				"min_size": {
+					"width": "1280",
+					"height": "775"
+				}
+			},
+			"AboutWindow": {
+				"file": "index.html",
+				"native_window": false,
+				"transparent": false,
+				"resizable": true,
+				"size": {
+					"width": "1280",
+					"height": "775"
+				},
+				"min_size": {
+					"width": "1280",
+					"height": "775"
+				}
+			},
+			"ErrorWindow": {
+				"file": "index.html",
+				"native_window": false,
+				"transparent": false,
+				"resizable": true,
+				"size": {
+					"width": "1280",
+					"height": "775"
+				},
+				"min_size": {
+					"width": "1280",
+					"height": "775"
+				}
 			}
 		}
 	}
