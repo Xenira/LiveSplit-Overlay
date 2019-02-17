@@ -6,9 +6,7 @@ input {
     display: none;
 }
 
-.setup-step
-
-.setup-step.active h2 {
+.setup-step .setup-step.active h2 {
     font-size: 1.75rem;
 }
 
@@ -38,16 +36,4 @@ input {
     align-items: center;
     justify-content: space-evenly;
     height: 100%;
-}
-
-/* a.secondary {
-            border-color: #7A7A7A;
-        }
-
-        a.secondary:hover {
-            background-color: rgba(122, 122, 122, 0.2);
-        } */
-
-#spinner {
-    display: none;
 }
