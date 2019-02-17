@@ -1,3 +1,8 @@
+a.small {
+    padding: 20px;
+    font-size: 12px;
+}
+
 a {
     border-color: #3373F4;
     border-style: solid;
@@ -7,11 +12,28 @@ a {
     user-select: none;
     pointer-events: initial;
     display: inline-block;
+    line-height: 0;
 }
 
 a:hover {
     background-color: rgba(51, 115, 244, 0.2);
     cursor: pointer;
+}
+
+a.primary {
+    border-color: #00CC36;
+}
+
+a.secondary {
+    border-color: #ACACAC;
+}
+
+a.primary:hover {
+    background-color: rgba(0, 204, 54, 0.2);
+}
+
+a.secondary:hover {
+    background-color: rgba(172, 172, 172, 0.2);
 }
 
 :host {

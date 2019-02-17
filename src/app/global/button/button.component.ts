@@ -10,9 +10,11 @@ export class ButtonComponent implements OnInit {
 
   @Input() href: string;
   @Input() target: 'default' | 'overwolf' = 'overwolf';
+  @Input() small = false;
+  @Input() primary = false;
+  @Input() secondary = false;
 
   @HostListener('click') onClick() {
-    console.log('clicked', this.href, this.target);
     if (this.href) {
       if (this.target === 'default') {
         this._overwolf.openUrlInDefaultBrowser(this.href);

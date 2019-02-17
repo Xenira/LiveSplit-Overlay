@@ -5,7 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class RgbaHexPipe implements PipeTransform {
 
-  transform(hex: string, args?: any): any {
+  transform(hex: string): any {
+    if (!hex) {
+      return;
+    }
+
     hex = hex.substring(1);
     while (hex.length < 8) {
       hex = '0' + hex;

@@ -1,9 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, ApplicationRef } from '@angular/core';
 import { TimerPhase } from 'src/app/livesplit/shared/livesplit.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import Settings from 'src/app/settings';
 import { TimerService } from '../../shared/timer.service';
-import { duration } from 'moment';
 
 @Component({
   selector: 'ls-timer',
@@ -19,15 +18,17 @@ export class TimerComponent implements OnInit {
   public time: number;
   public color: string;
 
-  constructor(private _sanitizer: DomSanitizer, public timer: TimerService) {
-  }
+  constructor(private ref: ApplicationRef, public timer: TimerService) { }
 
   ngOnInit() {
     setInterval(() => {
       this.time = this.timer.time;
-      const ms = duration(this.time).milliseconds();
-      this.milliseconds = ((ms < 10 ? '0' : '') + ms).substr(0, 2);
-      this.color = this.timer.getColor();
+      const ms = (this.time % 1000);
+      this.milliseconds = (ms < 10 ? '00' : (ms < 100 ? '0' + ms : ms.toString())).substr(0, 2);
+      try {
+        this.color = this.timer.getColor();
+      } catch { }
+      this.ref.tick();
     }, 13);
   }
 }

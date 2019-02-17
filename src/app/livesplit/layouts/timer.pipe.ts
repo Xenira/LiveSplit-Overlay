@@ -30,7 +30,7 @@ export class TimerPipe implements PipeTransform {
     if (minutes || (minutes === 0 && alwaysShowMinutes) || hours) {
       m = ((hours && minutes < 10 && minutes !== 0) ? '0' + minutes : minutes) + ':';
     }
-    const s = (minutes || seconds === 0) && (seconds < 10 && (seconds !== 0 || minutes)) ? '0' + seconds : seconds;
+    const s = (minutes || seconds === 0 || alwaysShowMinutes) && (seconds < 10 && (seconds !== 0 || minutes)) ? '0' + seconds : seconds;
     const ms = minutes === 0 ? ('.' + milliseconds).substr(0, trimMs) : '';
     return sign + h + m + s + ms;
   }
