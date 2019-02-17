@@ -1,6 +1,3 @@
-<div id="container" [ngSwitch]="target" [style.background-color]="layout.background | rgbaHex" [style.color]="layout.colors.text">
-    <ls-overlay *ngSwitchCase="'LiveSplitWindow'"></ls-overlay>
-    <ls-welcome *ngSwitchCase="'WelcomeWindow'"></ls-welcome>
-    <!-- <ls-overlay></ls-overlay>
-    <ls-controlls></ls-controlls> -->
+<div id="container" [style.background-color]="layout.background | rgbaHex" [style.color]="layout.colors.text">
+    <ng-container *ngIf="target" [lsLoadModule]="target"></ng-container>
 </div>

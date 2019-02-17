@@ -9,7 +9,7 @@ import { OverwolfService } from './global/overwolf.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public target = 'loading';
+  public target;
   layout = Settings.layout;
 
   constructor(private _overwolf: OverwolfService) { }

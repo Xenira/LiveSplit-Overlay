@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GlobalModule } from '../global/global.module';
-import { OverlayComponent } from './overlay.component';
+import { LivesplitComponent } from './livesplit.component';
 import { LayoutsModule } from './layouts/layouts.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ControllsComponent } from './controlls/controlls.component';
 
 @NgModule({
-  declarations: [OverlayComponent],
+  declarations: [LivesplitComponent, ControllsComponent],
   imports: [
     CommonModule,
     GlobalModule,
     LayoutsModule,
     FontAwesomeModule
   ],
-  exports: [OverlayComponent]
+  exports: [LivesplitComponent],
+  entryComponents: [LivesplitModule.rootComponent]
 })
-export class LivesplitModule { }
+export class LivesplitModule {
+  static rootComponent = LivesplitComponent;
+}

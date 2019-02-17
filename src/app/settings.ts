@@ -1,7 +1,7 @@
 export default {
     layout: {
         background: '#FF0F0F0F',
-        opacity: 0.84,
+        opacity: 0.85,
         colors: {
             bestSegment: '#FFD8AF1F',
             aheadGaining: '#FF00CC36',
@@ -38,7 +38,7 @@ export default {
     splits: {
         background: {
             color1: '#FFFFFF',
-            color2: '#01FFFFFF',
+            color2: '#09FFFFFF',
             type: 'alternating'
         },
         maxSplits: 16,

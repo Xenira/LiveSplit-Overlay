@@ -14,6 +14,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     GlobalModule,
     FontAwesomeModule
   ],
-  exports: [WelcomeComponent]
+  exports: [WelcomeComponent],
+  entryComponents: [WelcomeModule.rootComponent]
 })
-export class WelcomeModule { }
+export class WelcomeModule {
+  static rootComponent = WelcomeComponent;
+}

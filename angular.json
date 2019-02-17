@@ -36,8 +36,8 @@
             ],
             "scripts": [],
             "lazyModules": [
-              "src/app/livesplit/overlay.component",
-              "src/app/welcome/welcome.component"
+              "src/app/livesplit/livesplit.module",
+              "src/app/welcome/welcome.module"
             ],
             "es5BrowserSupport": true
           },
