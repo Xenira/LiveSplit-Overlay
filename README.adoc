@@ -3,7 +3,7 @@ LiveSplit Overlay for Overwolf
 Lasse Sprengel <lasse.sprengel@pm.me>
 v0.1
 
-image:https://img.shields.io/github/release/Xenira/LiveSplit-Overlay.svg?style=flat-square[Version] image:image:https://img.shields.io/github/release-date/xenira/LiveSplit-Overlay.svg?style=flat-square[Last Release] image:https://img.shields.io/github/license/xenira/LiveSplit-Overlay.svg?style=flat-square[License] image:https://img.shields.io/github/issues-raw/xenira/LiveSplit-Overlay.svg?style=flat-square[Issues]
+image:https://img.shields.io/github/release/Xenira/LiveSplit-Overlay.svg?style=flat-square[Version] image:https://img.shields.io/github/release-date/xenira/LiveSplit-Overlay.svg?style=flat-square[Last Release] image:https://img.shields.io/github/license/xenira/LiveSplit-Overlay.svg?style=flat-square[License] image:https://img.shields.io/github/issues-raw/xenira/LiveSplit-Overlay.svg?style=flat-square[Issues]
 
 image:https://img.shields.io/david/xenira/LiveSplit-Overlay.svg?style=flat-square[Dependencies] image:https://img.shields.io/david/dev/xenira/LiveSplit-Overlay.svg?style=flat-square[Dev-Dependencies]
 
