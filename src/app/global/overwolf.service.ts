@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 declare const overwolf;
+
 export type OWStatus = 'success' | 'error';
 export enum eEncoding {
   UTF8 = overwolf.io.enums.eEncoding.UTF8,
@@ -16,6 +17,7 @@ export interface OWWindow { id: string; name: string; width: number; height: num
 })
 export class OverwolfService {
 
+  private mainWindow = overwolf.windows.getMainWindow();
   private window: OWWindow;
   private plugin: { [key: string]: any } = {};
 
@@ -123,5 +125,13 @@ export class OverwolfService {
         resolve(res);
       });
     });
+  }
+
+  openWindow(name: string) {
+    this.mainWindow.startWindow(name);
+  }
+
+  openHelp() {
+    this.openWindow('HelpWindow');
   }
 }

@@ -4,8 +4,37 @@ html,
 body {
     height: 100%;
     margin: 0;
-    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif, monospace;
     font-size: 14px;
     font-weight: 400; // user-select: none;
     text-shadow: 1px 1px black;
+}
+
+ls-button {
+    p {
+        padding-top: 12px;
+        margin-bottom: -2px;
+    }
+}
+
+.spinner {
+    height: 30px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+    fill: white;
+    animation-name: spin;
+    animation-duration: 3s;
+    animation-iteration-count: infinite; // background: url(assets/sync-solid.svg);
+    img {
+        margin-top: -5px;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
