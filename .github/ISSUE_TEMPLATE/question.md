@@ -14,4 +14,4 @@ A clear and concise description of what you want to know.
 A clear and concise description of the steps you have taken to answer the question.
 
 **Additional context**
-Add any other context or screenshots about the feature request here.
+Add any other context or screenshots about the question here.
