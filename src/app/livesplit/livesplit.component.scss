@@ -8,6 +8,7 @@
     display: flex;
     #content {
         flex: 1;
+        display: flex;
     }
 }
 
@@ -32,10 +33,6 @@
     right: 0;
     position: absolute;
     cursor: nw-resize;
-}
-
-#content {
-    display: flex;
 }
 
 #layouts {

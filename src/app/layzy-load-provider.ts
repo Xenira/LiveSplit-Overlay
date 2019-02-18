@@ -11,7 +11,7 @@ export type LAZY_MODULES = {
 export const lazyMap: LAZY_MODULES = {
     WelcomeWindow: 'src/app/welcome/welcome.module#WelcomeModule',
     LiveSplitWindow: 'src/app/livesplit/livesplit.module#LivesplitModule',
-    HelpWindow: '/src/app/help/help.module#HelpModule',
+    HelpWindow: 'src/app/help/help.module#HelpModule',
 };
 
 export const LAZY_MODULES_MAP = new InjectionToken('LAZY_MODULES_MAP', {

@@ -1,0 +1,7 @@
+<div class="question" *ngFor="let question of questions; let i = index" (click)="activateQuestion(i)"
+  [class.active]="activeQuestion === i">
+  <h4>Q: {{question.question}}</h4>
+  <p class="answer">
+    A: {{question.answer}}
+  </p>
+</div>

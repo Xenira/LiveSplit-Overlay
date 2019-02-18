@@ -1,0 +1,25 @@
+.question {
+    border-color: rgba(255, 255, 255, 0.24);
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    height: auto;
+    transition: margin .2s ease;
+    .answer {
+        display: none;
+        transform: scaleY(0);
+    }
+}
+
+.question.active {
+    margin-bottom: 12px;
+    margin-top: 12px;
+    .answer {
+        display: block;
+        transform: scaleY(1);
+    }
+}
+
+.question:hover h4 {
+    text-decoration: underline;
+}
